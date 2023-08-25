@@ -118,3 +118,15 @@ char* StringFind(char* where, const char* goal)
 
     return NULL;
 }
+
+char* StringFindChar(char* where, const char goal)
+{
+    while (*where != '\0')
+    {
+        if (*where == goal)
+            return where;
+        where++;
+    }
+
+    return NULL;
+}
