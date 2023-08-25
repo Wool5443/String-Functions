@@ -3,6 +3,5 @@
 *.json
 *.o
 main.cpp
-headers/string_functions.hpp
 solve_quadratic/solve_quadratic.hpp
 solve_quadratic/utils.hpp
