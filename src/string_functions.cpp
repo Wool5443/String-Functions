@@ -52,16 +52,34 @@ char* StringCopyAll(char* destination, const char* source)
     return destination;
 }
 
-bool StringCompare(const char* s1, const char* s2)
+CompareResult StringCompare(const char* s1, const char* s2)
 {
-    size_t s1Length = StringLength(s1);
+    while (*s1 != '\0' || *s2 != '\0')
+    {
+        if (*s1 < *s2)
+            return LESS;
+        if (*s1 > *s2)
+            return MORE;
 
-    if (s1Length != StringLength(s2))
-        return false;
+        s1++;
+        s2++;
+    }
 
-    for (size_t i = 0; i < s1Length; i++)
-        if (s1[i] != s2[i])
-            return false;
+    return EQAUL;
+}
 
-    return true;
+char* StringCat(char* destination, const char* source)
+{
+    while (*destination != '\0')
+        destination++;
+
+    while (*source != '\0')
+    {
+        *destination = *source;
+        destination++;
+        source++;
+    }
+    *destination = *source;
+
+    return destination;
 }
