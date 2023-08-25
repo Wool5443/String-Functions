@@ -19,10 +19,13 @@ size_t StringLength(const char* string)
 
 char* StringCopy(char* destination, const char* source, size_t maxLength)
 {
+    MyAssertHard(destination, ERROR_NULLPTR, );
+    MyAssertHard(source, ERROR_NULLPTR, );
+
     size_t sourceLength = StringLength(source) + INCLUDE_0_FIX;
 
     MyAssertHard(destination + min(sourceLength, maxLength) <= source || source + sourceLength <= destination
-        , ERROR_INDEX_OUT_OF_BOUNDS, );
+        , ERROR_OVERLAP, );
 
     for (size_t i = 0; i < min(sourceLength, maxLength); i++)
     {
@@ -38,11 +41,14 @@ char* StringCopy(char* destination, const char* source, size_t maxLength)
 
 char* StringCopyAll(char* destination, const char* source)
 {
+    MyAssertHard(destination, ERROR_NULLPTR, );
+    MyAssertHard(source, ERROR_NULLPTR, );
+
     size_t sourceLength = StringLength(source);
 
     MyAssertHard(destination + sourceLength < source
         || source + sourceLength < destination
-        , ERROR_INDEX_OUT_OF_BOUNDS, );
+        , ERROR_OVERLAP, );
 
     for (size_t i = 0; i < sourceLength; i++)
     {
@@ -54,6 +60,9 @@ char* StringCopyAll(char* destination, const char* source)
 
 CompareResult StringCompare(const char* s1, const char* s2)
 {
+    MyAssertHard(s1, ERROR_NULLPTR, );
+    MyAssertHard(s2, ERROR_NULLPTR, );
+
     while (*s1 != '\0' && *s2 != '\0')
     {
         if (*s1 < *s2)
@@ -75,6 +84,9 @@ CompareResult StringCompare(const char* s1, const char* s2)
 
 bool StringEqual(const char* s1, const char* s2, const size_t length)
 {
+    MyAssertHard(s2, ERROR_NULLPTR, );
+    MyAssertHard(s1, ERROR_NULLPTR, );
+
     size_t s1Length = StringLength(s1);
     size_t s2Length = StringLength(s2);
 
@@ -90,6 +102,15 @@ bool StringEqual(const char* s1, const char* s2, const size_t length)
 
 char* StringCat(char* destination, const char* source)
 {
+    MyAssertHard(destination, ERROR_NULLPTR, );
+    MyAssertHard(source, ERROR_NULLPTR, );
+
+    size_t destinationLength = StringLength(destination);
+    size_t sourceLength = StringLength(source);
+
+    MyAssertHard(destination + destinationLength + sourceLength < source
+        || source + sourceLength < destination, ERROR_OVERLAP, );
+
     while (*destination != '\0')
         destination++;
 
@@ -106,6 +127,10 @@ char* StringCat(char* destination, const char* source)
 
 char* StringFind(char* where, const char* goal)
 {
+    MyAssertHard(where, ERROR_NULLPTR, );
+    MyAssertHard(goal, ERROR_NULLPTR, );
+
+
     size_t whereLength = StringLength(where);
     size_t goalLength = StringLength(goal);
 
@@ -121,6 +146,8 @@ char* StringFind(char* where, const char* goal)
 
 char* StringFindChar(char* where, const char goal)
 {
+    MyAssertHard(where, ERROR_NULLPTR, );
+
     while (*where != '\0')
     {
         if (*where == goal)
