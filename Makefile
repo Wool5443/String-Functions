@@ -3,4 +3,4 @@ IFLAGS=-I./headers/ -I./solve_quadratic/
 OBJS=solve_quadratic/solve_quadratic.o solve_quadratic/utils.o
 
 all:
-	g++ $(CFLAGS) $(IFLAGS) main.cpp src/string_functions.cpp $(OBJS) -o main.exe
+	g++ -g $(CFLAGS) $(IFLAGS) main.cpp src/string_functions.cpp $(OBJS) -o main.exe

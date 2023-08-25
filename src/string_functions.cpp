@@ -54,7 +54,7 @@ char* StringCopyAll(char* destination, const char* source)
 
 CompareResult StringCompare(const char* s1, const char* s2)
 {
-    while (*s1 != '\0' || *s2 != '\0')
+    while (*s1 != '\0' && *s2 != '\0')
     {
         if (*s1 < *s2)
             return LESS;
@@ -65,7 +65,27 @@ CompareResult StringCompare(const char* s1, const char* s2)
         s2++;
     }
 
+    if (*s1 < *s2)
+        return LESS;
+    if (*s1 > *s2)
+        return MORE;
+
     return EQAUL;
+}
+
+bool StringEqual(const char* s1, const char* s2, const size_t length)
+{
+    size_t s1Length = StringLength(s1);
+    size_t s2Length = StringLength(s2);
+
+    if (s1Length < length || s2Length < length)
+        return false;
+
+    for (size_t i = 0; i < length; i++)
+        if (s1[i] != s2[i])
+            return false;
+
+    return true;
 }
 
 char* StringCat(char* destination, const char* source)
@@ -82,4 +102,19 @@ char* StringCat(char* destination, const char* source)
     *destination = *source;
 
     return destination;
+}
+
+char* StringFind(char* where, const char* goal)
+{
+    size_t whereLength = StringLength(where);
+    size_t goalLength = StringLength(goal);
+
+    if (whereLength < goalLength)
+        return NULL;
+
+    for (size_t i = 0; i + goalLength - 1 < whereLength; i++)
+        if (StringEqual(where + i, goal, goalLength))
+            return where + i;
+
+    return NULL;
 }

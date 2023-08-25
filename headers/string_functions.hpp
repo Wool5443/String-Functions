@@ -8,4 +8,8 @@ char* StringCopyAll(char* destination, const char* source);
 
 CompareResult StringCompare(const char* s1, const char* s2);
 
+bool StringEqual(const char* s1, const char* s2, const size_t length);
+
 char* StringCat(char* destination, const char* source);
+
+char* StringFind(char* where, const char* goal);
