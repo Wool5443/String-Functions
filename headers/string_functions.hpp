@@ -1,3 +1,5 @@
+#include <stddef.h>
+
 enum CompareResult { LESS = -1, EQAUL = 0, MORE = 1 };
 
 size_t StringLength(const char* string);
