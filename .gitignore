@@ -3,8 +3,6 @@
 *.json
 *.o
 main.cpp
-solve_quadratic/solve_quadratic.hpp
-solve_quadratic/utils.hpp
 main
 slv_qdrtc/utils.hpp
 a.out
