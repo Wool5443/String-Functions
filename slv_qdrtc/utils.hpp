@@ -50,13 +50,13 @@ if (!(STATEMENT))                                                               
   */
 #define max(x, y)                                                                                                   \
 ({                                                                                                                  \
-    typeof(x) _tx = x; typeof(y) _ty = y;                                                                           \
+    __typeof__(x) _tx = x; __typeof__(y) _ty = y;                                                                           \
     _tx > _ty ? _tx : _ty;                                                                                          \
 })
 
 #define min(x, y)                                                                                                   \
 ({                                                                                                                  \
-    typeof(x) _tx = x; typeof(y) _ty = y;                                                                           \
+    __typeof__(x) _tx = x; __typeof__(y) _ty = y;                                                                           \
     _tx < _ty ? _tx : _ty;                                                                                          \
 })
 

@@ -3,4 +3,4 @@ IFLAGS=-I./headers/ -I./slv_qdrtc/
 OBJS=slv_qdrtc/utils.o
 
 all:
-	g++ -g $(CFLAGS) $(IFLAGS) main.cpp src/string_functions.cpp $(OBJS) -o main
+	g++ main.cpp src/string_functions.cpp $(OBJS) -o main $(CFLAGS) $(IFLAGS) -g

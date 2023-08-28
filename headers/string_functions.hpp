@@ -14,6 +14,4 @@ bool StringEqual(const char* s1, const char* s2, const size_t length);
 
 char* StringFind(char* where, const char* target);
 
-char* StringFind2(char* where, const char* target);
-
 char* StringFindChar(char* where, const char goal);
