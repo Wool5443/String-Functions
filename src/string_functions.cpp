@@ -11,9 +11,7 @@ size_t StringLength(const char* string)
 
     size_t length = 0;
     while (*(string++) != '\0')
-    {
         length++;
-    }
 
     return length;
 }
@@ -29,9 +27,7 @@ char* StringCopy(char* destination, const char* source, size_t maxLength)
         || source + sourceLength <= destination, ERROR_OVERLAP, );
 
     for (size_t i = 0; i < min(sourceLength, maxLength); i++)
-    {
         destination[i] = source[i];
-    }
 
     if (sourceLength > maxLength)
         destination[maxLength - 1] = '\0';
@@ -49,9 +45,7 @@ char* StringCopyAll(char* destination, const char* source)
     MyAssertHard(destination + sourceLength < source || source + sourceLength < destination, ERROR_OVERLAP, );
 
     for (size_t i = 0; i < sourceLength; i++)
-    {
         destination[i] = source[i];
-    }
 
     return destination;
 }
