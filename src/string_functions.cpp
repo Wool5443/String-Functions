@@ -1,7 +1,7 @@
 #include "string_functions.hpp"
 #include "utils.hpp"
 
-constexpr int INCLUDE_NTRM_FIX = 1, FOUND_STRING = -1;
+const int INCLUDE_NTRM_FIX = 1, FOUND_STRING = -1;
 
 int findShift(const char* where, const char* target, const size_t place, const size_t targetLength);
 
@@ -63,7 +63,7 @@ char* StringCat(char* destination, const char* source, size_t maxLength)
 
     size_t destinationLength = StringLength(destination);
 
-    return StringCopy(destination + destinationLength, source, maxLength - (destinationLength));
+    return StringCopy(destination + destinationLength, source, maxLength - destinationLength) - destinationLength;
 }
 
 int StringCompare(const char* s1, const char* s2)
@@ -148,6 +148,9 @@ char* StringFindChar(char* where, const char target)
 
 int findShift(const char* where, const char* target, const size_t place, const size_t targetLength)
 {
+    MyAssertHard(where, ERROR_NULLPTR, );
+    MyAssertHard(target, ERROR_NULLPTR, );
+
     for (size_t i = 0; i < targetLength; i++)
         if (where[place + targetLength - 1 - i] != target[targetLength - 1 - i])
             return where[place + targetLength - 1 - i];
