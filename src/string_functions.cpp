@@ -2,7 +2,9 @@
 #include "string_functions.hpp"
 #include "utils.hpp"
 
-constexpr int INCLUDE_NTRM_FIX = 1;
+constexpr int INCLUDE_NTRM_FIX = 1, SCHAR_TO_UCHAR = 128, FOUND_STRING = -1;
+
+int findShift(const char* where, const char* target, const size_t place, const size_t targetLength);
 
 size_t StringLength(const char* string)
 {
@@ -126,6 +128,40 @@ char* StringFind(char* where, const char* target)
     return NULL;
 }
 
+char* StringFind2(char* where, const char* target)
+{
+    MyAssertHard(where, ERROR_NULLPTR, );
+    MyAssertHard(target, ERROR_NULLPTR, );
+
+    size_t whereLength = StringLength(where);
+    size_t targetLength = StringLength(target);
+    if (whereLength < targetLength)
+        return NULL;
+
+    size_t shifts[256] = {};
+    shifts[target[targetLength - 1 + SCHAR_TO_UCHAR]] = targetLength;
+
+    for (size_t i = 2; i < targetLength - 1; i++)
+    {
+        int c = target[targetLength - i] + SCHAR_TO_UCHAR;
+        shifts[c] = min(shifts[c], i - 1);
+    }
+
+    for (int i = 0; i < )
+
+        size_t place = 0;
+
+    while (place + targetLength - 1 < whereLength)
+    {
+        int shiftC = findShift(where, target, place, targetLength);
+        if (shiftC == FOUND_STRING)
+            return where + place;
+        place += shifts[shiftC];
+    }
+
+    return NULL;
+}
+
 char* StringFindChar(char* where, const char target)
 {
     MyAssertHard(where, ERROR_NULLPTR, );
@@ -138,4 +174,12 @@ char* StringFindChar(char* where, const char target)
     }
 
     return NULL;
+}
+
+int findShift(const char* where, const char* target, const size_t place, const size_t targetLength)
+{
+    for (size_t i = targetLength - 1; i >= 0; i--)
+        if (where[place + i] != target[i])
+            return where[place + i] + SCHAR_TO_UCHAR;
+    return FOUND_STRING;
 }

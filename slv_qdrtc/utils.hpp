@@ -35,13 +35,13 @@ static const char* ErrorNames[] = { "OKAY", "ERROR_NULLPTR", "ERROR_BAD_NUMBER",
  *
  * @note If there is nothing to perform pass nothing.
  */
-#define MyAssertHard(STATEMENT, ERR_CODE, EXIT_CMD)                                                                 \
+#define MyAssertHard(STATEMENT, ERR_CODE, EXIT_CMD)                                                                     \
 if (!(STATEMENT))                                                                                                   \
 {                                                                                                                   \
     SetConsoleColor(stderr, RED);                                                                                   \
     fprintf(stderr, "%s in %s in %s in line: %d\n", ErrorNames[ERR_CODE], __FILE__, __PRETTY_FUNCTION__, __LINE__); \
     SetConsoleColor(stderr, WHITE);                                                                                 \
-    EXIT_CMD;                                                                                                       \
+    EXIT_CMD;                                                                                                      \
     exit(ERR_CODE);                                                                                                 \
 }
 
@@ -50,15 +50,17 @@ if (!(STATEMENT))                                                               
   */
 #define max(x, y)                                                                                                   \
 ({                                                                                                                  \
-    __typeof__(x) _tx = x; __typeof__(y) _ty = y;                                                                           \
+    typeof(x) _tx = x; typeof(y) _ty = y;                                                                           \
     _tx > _ty ? _tx : _ty;                                                                                          \
 })
 
 #define min(x, y)                                                                                                   \
 ({                                                                                                                  \
-    __typeof__(x) _tx = x; __typeof__(y) _ty = y;                                                                           \
+    typeof(x) _tx = x; typeof(y) _ty = y;                                                                           \
     _tx < _ty ? _tx : _ty;                                                                                          \
 })
+
+#define ArrayLength(array) sizeof(array) / sizeof(array[0])
 
   /**
   * @brief Tells if 2 doubles are equal.
