@@ -1,7 +1,6 @@
 
 *.exe
 *.json
-*.o
 main.cpp
 main
 a.out
