@@ -122,10 +122,10 @@ char* StringFind(char* where, const char* target)
 
     while (place + targetLength - 1 < whereLength)
     {
-        int shiftC = findShift(where, target, place, targetLength);
-        if (shiftC == FOUND_STRING)
+        int shiftChar = findShift(where, target, place, targetLength);
+        if (shiftChar == FOUND_STRING)
             return where + place;
-        place += shifts[shiftC];
+        place += shifts[shiftChar];
     }
 
     return NULL;
