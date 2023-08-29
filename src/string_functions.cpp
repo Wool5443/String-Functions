@@ -1,7 +1,7 @@
 #include "string_functions.hpp"
 #include "utils.hpp"
 
-const int INCLUDE_NTRM_FIX = 1, FOUND_STRING = -1;
+const int INCLUDE_NULL_TERMINATOR_FIX = 1, FOUND_STRING = -1;
 
 int findShift(const char* where, const char* target, const size_t place, const size_t targetLength);
 
@@ -21,16 +21,18 @@ char* StringCopy(char* destination, const char* source, size_t maxLength)
     MyAssertHard(destination, ERROR_NULLPTR, );
     MyAssertHard(source, ERROR_NULLPTR, );
 
-    size_t sourceLength = StringLength(source) + INCLUDE_NTRM_FIX;
+    size_t sourceLength = StringLength(source);
+    size_t numOfElToCopy = min(sourceLength, maxLength - INCLUDE_NULL_TERMINATOR_FIX);
 
-    MyAssertHard(destination + min(sourceLength, maxLength) <= source
-        || source + sourceLength <= destination, ERROR_OVERLAP, );
+    MyAssertHard(destination + maxLength <= source
+        || source + sourceLength < destination,
+        ERROR_OVERLAP,
+        );
 
-    for (size_t i = 0; i < min(sourceLength, maxLength); i++)
+    for (size_t i = 0; i < numOfElToCopy; i++)
         destination[i] = source[i];
 
-    if (sourceLength > maxLength)
-        destination[maxLength - 1] = '\0';
+    destination[numOfElToCopy] = '\0';
 
     return destination;
 }
@@ -42,7 +44,10 @@ char* StringCopyAll(char* destination, const char* source)
 
     size_t sourceLength = StringLength(source);
 
-    MyAssertHard(destination + sourceLength < source || source + sourceLength < destination, ERROR_OVERLAP, );
+    MyAssertHard(destination + sourceLength < source
+        || source + sourceLength < destination,
+        ERROR_OVERLAP,
+        );
 
     for (size_t i = 0; i < sourceLength; i++)
         destination[i] = source[i];
