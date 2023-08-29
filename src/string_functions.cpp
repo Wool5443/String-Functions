@@ -1,7 +1,7 @@
 #include "string_functions.hpp"
 #include "utils.hpp"
 
-const int INCLUDE_NULL_TERMINATOR_FIX = 1, FOUND_STRING = -1;
+const int INCLUDE_NULL_TERMINATOR_FIX = 1, FOUND_STRING = -1, ALPHABET_LENGTH = 256;
 
 int findShift(const char* where, const char* target, const size_t place, const size_t targetLength);
 
@@ -107,7 +107,7 @@ char* StringFind(char* where, const char* target)
     if (whereLength < targetLength)
         return NULL;
 
-    size_t shifts[256] = {};
+    size_t shifts[ALPHABET_LENGTH] = {};
 
     for (size_t i = 0; i < ArrayLength(shifts); i++)
         shifts[i] = targetLength;
