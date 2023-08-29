@@ -4,8 +4,4 @@
 *.o
 main.cpp
 main
-slv_qdrtc/utils.hpp
 a.out
-slv_qdrtc/utils.hpp
-slv_qdrtc/solve_quadratic.a
-slv_qdrtc/solve_quadratic.hpp
