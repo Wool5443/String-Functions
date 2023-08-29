@@ -97,7 +97,7 @@ bool StringEqual(const char* s1, const char* s2, const size_t length)
     return true;
 }
 
-char* StringFind(const char* where, const char* target)
+const char* StringFind(const char* where, const char* target)
 {
     MyAssertHard(where, ERROR_NULLPTR, );
     MyAssertHard(target, ERROR_NULLPTR, );
@@ -124,14 +124,14 @@ char* StringFind(const char* where, const char* target)
     {
         int shiftChar = findShift(where, target, place, targetLength);
         if (shiftChar == FOUND_STRING)
-            return (char*)where + place;
+            return where + place;
         place += shifts[shiftChar];
     }
 
     return NULL;
 }
 
-char* StringFindChar(char* where, const char target)
+const char* StringFindChar(const char* where, const char target)
 {
     MyAssertHard(where, ERROR_NULLPTR, );
 

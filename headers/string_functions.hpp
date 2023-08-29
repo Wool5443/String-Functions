@@ -81,7 +81,7 @@ bool StringEqual(const char* s1, const char* s2, const size_t length);
  *
  * @return char* to the target substring in destination.
 */
-char* StringFind(char* where, const char* target);
+const char* StringFind(const char* where, const char* target);
 
 /**
  * @brief Finds char target in where and return a pointer to its location.
@@ -91,6 +91,6 @@ char* StringFind(char* where, const char* target);
  *
  * @return char* to the first occurence of target in where.
 */
-char* StringFindChar(char* where, const char target);
+const char* StringFindChar(const char* where, const char target);
 
 #endif
