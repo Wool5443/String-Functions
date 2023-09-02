@@ -1,8 +1,4 @@
 
 *.exe
 *.json
-main.cpp
-main
-a.out
-obj/main.o
-obj/string_functions.o
+*.o
