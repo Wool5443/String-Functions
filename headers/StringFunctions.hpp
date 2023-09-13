@@ -1,9 +1,14 @@
 //! @file
 
-#include <stddef.h>
-
 #ifndef STRING_FUNTCIONS_HPP
 #define STRING_FUNTCIONS_HPP
+
+#include <stddef.h>
+#include <stdio.h>
+
+enum StringCompareMethod {START_TO_END, END_TO_START};
+
+enum CaseOptions {IGNORE_CASE, MIND_CASE};
 
 /**
  * @brief Counts the lenght of a null terminated string.
@@ -55,10 +60,12 @@ char* StringCat(char* destination, const char* source, size_t maxLength);
  * @param [in] s1, s2 - strings to compare.
  *
  * @return >0 - s1 is bigger.
- * @return - equal.
+ * @return 0 - equal.
  * @return <0 - s2 is bigger.
 */
-int StringCompare(const char* s1, const char* s2);
+int StringCompare(const char* s1, const char* s2, 
+                  StringCompareMethod stringCompareMethod,
+                  CaseOptions caseOption, const char* filter, char terminator);
 
 /**
  * @brief Compares length elements of the strings and returns if they are equal.
@@ -81,7 +88,7 @@ bool StringEqual(const char* s1, const char* s2, const size_t length);
  *
  * @return char* to the target substring in destination.
 */
-const char* StringFind(const char* where, const char* target);
+char* StringFind(char* where, const char* target);
 
 /**
  * @brief Finds char target in where and return a pointer to its location.
@@ -91,6 +98,18 @@ const char* StringFind(const char* where, const char* target);
  *
  * @return char* to the first occurence of target in where.
 */
-const char* StringFindChar(const char* where, const char target);
+char* StringFindChar(char* where, const char target);
+
+/**
+ * @brief filters all filter chars in string.
+ * 
+ * @param [in, out] string - the string to filter.
+ * @param [in] filter - the chats to filter out.
+ * 
+ * @return char* to the string.
+*/
+char* StringFilter(char* string, const char* filter);
+
+void StringPrint(FILE* where, const char* string, char terminator);
 
 #endif
