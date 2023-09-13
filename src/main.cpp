@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "string_functions.hpp"
+#include "StringFunctions.hpp"
 
 int main(void)
 {
