@@ -6,20 +6,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define TESTINGs
+
 /**
  * @brief Represents colors for @see SetConsoleColor
  */
 enum Color { RED, GREEN, WHITE };
 
-/**
+/** @enum ErrorCode
  * @brief Represents possible error codes for @see MyAssertHard()
  */
 enum ErrorCode 
 {
   EVERYTHING_FINE = 0, ERROR_NULLPTR, ERROR_BAD_NUMBER, ERROR_BAD_FILE, ERROR_OVERLAP,
-  ERROR_INDEX_OUT_OF_BOUNDS, ERROR_NO_MEMORY
+  ERROR_INDEX_OUT_OF_BOUNDS, ERROR_NO_MEMORY, ERROR_NO_COMPARATOR
 };
 
+/**
+ * @brief typedef for compare functions used in universal quicksort.
+*/
 typedef int CompareFunction_t(const void* a, const void* b);
 
 /**
@@ -57,24 +62,7 @@ do {                                                                            
 ({                                                                                                                  \
     __typeof__(x) _tx = x; __typeof__(y) _ty = y;                                                                   \
     _tx < _ty ? _tx : _ty;                                                                                          \
-})
-
-#define SWAP(a, b, size)                                                                                            \
-do                                                                                                                  \
-{                                                                                                                   \
-    char* _a = (char*)a;                                                                                            \
-    char* _b = (char*)b;                                                                                            \
-                                                                                                                    \
-    for (size_t curByte = 0; curByte < size; curByte++)                                                             \
-    {                                                                                                               \
-        char _temp = _a[curByte];                                                                                   \
-        _a[curByte] = _b[curByte];                                                                                  \
-        _b[curByte] = _temp;                                                                                        \
-    }                                                                                                               \
-                                                                                                                    \
-} while (0);                                                                                                        \
-
-#define ArrayLength(array) (sizeof(array) / sizeof(array[0]))
+})                                                                                         \
 
 /**
  * @brief Tells if 2 doubles are equal.
@@ -96,11 +84,47 @@ bool IsEqual(const double x1, const double x2);
  */
 void CopyArray(double destination[], double source[], int length);
 
+/**
+ * @brief Finds min of the given array of any type.
+ * 
+ * @param [in] data - the array to find min in.
+ * @param [in] elementCount - length of the array.
+ * @param [in] elementSize - size in bytes of the elements.
+ * @param [in] compareFuntion - @see CompareFunction_t - the comparator.
+ * 
+ * @return const void* the the smalles element.
+*/
 const void* MinArray(const void* data, size_t elementCount, size_t elementSize, CompareFunction_t* compareFunction);
+
+/**
+ * @brief Finds max of the given array of any type.
+ * 
+ * @param [in] data - the array to find max in.
+ * @param [in] elementCount - length of the array.
+ * @param [in] elementSize - size in bytes of the elements.
+ * @param [in] compareFuntion - @see CompareFunction_t - the comparator.
+ * 
+ * @return const void* the the largest element.
+*/
 const void* MaxArray(const void* data, size_t elementCount, size_t elementSize, CompareFunction_t* compareFunction);
 
 /**
- * @brief Sorts the given array according to the Compare Function
+ * @brief Swaps the raw bytes of a and b.
+ * 
+ * @param [in] a - pointer to the 1st object.
+ * @param [in] b - pointer to the 2nd object.
+ * @param [in] size - size of the objects.
+*/
+void Swap(void* a, void* b, size_t size);
+
+/**
+ * @brief Sorts the given array according to the Compare Function.
+ * Uses randomized quick sort.
+ * 
+ * @param [in] data - the array to sort.
+ * @param [in] elementCount - length of the array.
+ * @param [in] elementSize - size in bytes of the array elements.
+ * @param [in] compareFunction - @see CompareFunction_t
 */
 void Sort(void* data, size_t elementCount, size_t elementSize, CompareFunction_t* compareFunction);
 
