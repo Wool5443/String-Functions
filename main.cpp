@@ -6,7 +6,7 @@ int main(void)
     char s1[10];
     char s2[] = "hello";
 
-    StringCopy(s1, s2, 10);
+    StringCopy(s1, s2, 10, 0);
 
     puts(s1);
 
