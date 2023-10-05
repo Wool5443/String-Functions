@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 /** @struct String
- * @brief Represents a cons string with its length.
+ * @brief Represents a const string with its length.
  * 
  * @var String::text - data.
  * @var String::length - length of the string.
