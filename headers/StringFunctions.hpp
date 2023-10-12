@@ -170,5 +170,7 @@ void StringPrint(FILE* file, const char* string, char terminator);
  * @return 1 if true, 0 if false.
 */
 int StringIsEmptyChars(const String* string);
+int StringIsEmptyChars(const char* string);
+
 
 #endif

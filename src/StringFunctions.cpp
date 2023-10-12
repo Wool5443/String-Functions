@@ -296,3 +296,12 @@ int StringIsEmptyChars(const String* string)
             return 0;
     return 1;
 }
+
+int StringIsEmptyChars(const char* string)
+{
+    size_t stringLength = StringLength(string, 0);
+    for (size_t i = 0; i < stringLength; i++)
+        if (!isspace(string[i]))
+            return 0;
+    return 1;
+}
