@@ -297,11 +297,12 @@ int StringIsEmptyChars(const String* string)
     return 1;
 }
 
-int StringIsEmptyChars(const char* string)
+int StringIsEmptyChars(const char* string, char terminator)
 {
-    size_t stringLength = StringLength(string, 0);
-    for (size_t i = 0; i < stringLength; i++)
-        if (!isspace(string[i]))
-            return 0;
-    return 1;
+    while (isspace(*string) && *string != terminator)
+        *string++;
+
+    if (*string == 0)
+        return 1;
+    return 0;
 }
